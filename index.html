@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GharOS — Your household, finally in one place.</title>
+<style>
+:root{
+  --bg:#f7f5f1;--card:#fff;--ink:#171717;--muted:#77736d;
+  --line:#e7e2da;--accent:#29443b;--accent2:#e9f0ec;--warn:#8a5a21;
+}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);
+font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input{font:inherit}button{cursor:pointer}
+.app{max-width:1180px;margin:auto;padding:28px 22px 50px}
+.nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:42px}
+.logo{font-size:21px;font-weight:800;letter-spacing:-.04em}.logo span{color:var(--muted);font-weight:500}
+.pill{border:1px solid var(--line);background:white;border-radius:999px;padding:9px 14px;color:#4e4a45}
+.hero{display:grid;grid-template-columns:1.25fr .75fr;gap:22px;margin-bottom:22px}
+.hero-main{background:var(--accent);color:white;border-radius:28px;padding:34px}
+.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.13em;opacity:.68;font-weight:700}
+h1{font-size:clamp(36px,6vw,65px);line-height:.96;letter-spacing:-.055em;margin:16px 0}
+.hero-main p{max-width:570px;color:#d7e0db;font-size:16px;line-height:1.55;margin-bottom:24px}
+.cta{background:white;color:var(--accent);border:0;border-radius:12px;padding:12px 16px;font-weight:750}
+.hero-side{background:#ebe7df;border-radius:28px;padding:26px;display:flex;flex-direction:column;justify-content:space-between}
+.stat{font-size:43px;font-weight:800;letter-spacing:-.05em}.small{font-size:13px;color:var(--muted);line-height:1.45}
+.grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px}
+.card h3{margin:7px 0 4px;font-size:18px;letter-spacing:-.02em}.card p{margin:0;color:var(--muted);font-size:13px;line-height:1.5}
+.section-title{display:flex;justify-content:space-between;align-items:end;margin:38px 0 14px}
+.section-title h2{margin:0;font-size:25px;letter-spacing:-.04em}.section-title span{font-size:12px;color:var(--muted)}
+.insight{grid-column:span 2;background:#edf2ef}
+.insight-top{display:flex;justify-content:space-between;gap:20px}
+.badge{font-size:11px;background:#dce8e1;color:#29443b;padding:6px 9px;border-radius:999px;font-weight:700}
+.task{display:flex;gap:13px;padding:15px 0;border-bottom:1px solid var(--line)}
+.task:last-child{border:0;padding-bottom:0}.dot{width:9px;height:9px;border-radius:50%;background:#29443b;margin-top:5px;flex:none}
+.task b{font-size:14px}.task span{display:block;color:var(--muted);font-size:12px;margin-top:4px}
+.actions{display:flex;gap:8px;margin-top:15px;flex-wrap:wrap}.secondary{border:1px solid var(--line);background:white;border-radius:10px;padding:9px 12px;font-size:12px}
+.modal{position:fixed;inset:0;background:rgba(20,20,20,.38);display:none;align-items:center;justify-content:center;padding:18px;z-index:10}
+.modal.show{display:flex}.modal-box{max-width:520px;width:100%;background:white;border-radius:24px;padding:25px;box-shadow:0 20px 60px rgba(0,0,0,.18)}
+.modal-box h2{margin:0 0 7px;font-size:25px;letter-spacing:-.04em}.close{float:right;border:0;background:#f2f0ec;border-radius:50%;width:32px;height:32px}
+.explain{background:#f4f7f5;border:1px solid var(--line);border-radius:16px;padding:15px;margin:17px 0;line-height:1.55;font-size:13px}
+.chat{height:270px;overflow:auto;background:#faf9f7;border:1px solid var(--line);border-radius:16px;padding:14px}
+.msg{max-width:84%;padding:10px 12px;border-radius:13px;margin:7px 0;font-size:13px;line-height:1.45}.ai{background:#edf2ef}.me{background:#29443b;color:white;margin-left:auto}
+.chatbar{display:flex;gap:8px;margin-top:10px}.chatbar input{flex:1;border:1px solid var(--line);border-radius:11px;padding:11px 12px;outline:none}.chatbar button{border:0;background:#29443b;color:white;border-radius:11px;padding:0 16px;font-weight:700}
+.footer{margin-top:38px;text-align:center;color:var(--muted);font-size:12px}
+@media(max-width:800px){.hero,.grid{grid-template-columns:1fr}.insight{grid-column:span 1}.hero-main{padding:27px}.app{padding:20px 15px 40px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <nav class="nav">
+    <div class="logo">GharOS <span>· household intelligence</span></div>
+    <button class="pill" id="askNav">Ask GharOS</button>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-main">
+      <div class="eyebrow">A consumer product for India</div>
+      <h1>Your household,<br>finally in one place.</h1>
+      <p>GharOS quietly remembers the things families shouldn't have to — bills, warranties, appointments, services and recurring household routines.</p>
+      <button class="cta" id="seeToday">See what needs attention →</button>
+    </div>
+    <div class="hero-side">
+      <div>
+        <div class="eyebrow" style="color:#666">This month</div>
+        <div class="stat">₹2,840</div>
+        <div class="small">potential household savings identified by GharOS</div>
+      </div>
+      <div class="small"><b style="color:#222">The insight:</b> your electricity bill is 18% above your normal range.</div>
+    </div>
+  </section>
+
+  <div class="section-title" id="today">
+    <h2>What needs attention</h2><span>Thursday · 15 October</span>
+  </div>
+
+  <section class="grid">
+    <div class="card insight">
+      <div class="insight-top">
+        <div><span class="badge">AI INSIGHT</span><h3>Your electricity bill looks unusual.</h3>
+        <p>GharOS compared this month's bill with your household's recent pattern instead of just showing you the amount.</p></div>
+        <button class="secondary" id="whyBtn">Why?</button>
+      </div>
+      <div class="actions"><button class="secondary" id="saveBtn">Save ₹1,200 estimate</button><button class="secondary" id="remindBtn">Remind me Friday</button></div>
+    </div>
+
+    <div class="card">
+      <div class="eyebrow">Household memory</div>
+      <h3>RO service</h3><p>Service due Friday · warranty expires in 42 days.</p>
+      <div class="actions"><button class="secondary" id="serviceBtn">View details</button></div>
+    </div>
+
+    <div class="card">
+      <div class="eyebrow">Family</div>
+      <h3>Mum's appointment</h3><p>Thursday · 5:30 PM · 4.2 km away.</p>
+      <div class="actions"><button class="secondary" id="apptBtn">Add to plan</button></div>
+    </div>
+
+    <div class="card">
+      <div class="eyebrow">Recurring</div>
+      <h3>Groceries</h3><p>Staples usually run low around Sunday. Your usual list is ready.</p>
+      <div class="actions"><button class="secondary" id="groceryBtn">Review list</button></div>
+    </div>
+
+    <div class="card">
+      <div class="eyebrow">Household spend</div>
+      <h3>₹18,460 this month</h3><p>7% above your three-month average. Utilities explain most of the increase.</p>
+      <div class="actions"><button class="secondary" id="spendBtn">Break it down</button></div>
+    </div>
+  </section>
+
+  <div class="section-title"><h2>One question away</h2><span>AI that knows your household context</span></div>
+  <section class="card">
+    <div style="font-size:14px;font-weight:700">Try asking:</div>
+    <div class="actions">
+      <button class="secondary ask" data-q="Why is my electricity bill higher this month?">Why is my bill higher?</button>
+      <button class="secondary ask" data-q="What household tasks are due this week?">What's due this week?</button>
+      <button class="secondary ask" data-q="What can I save money on this month?">Where can I save?</button>
+    </div>
+  </section>
+
+  <div class="footer">GharOS is a product concept · designed as a consumer-tech prototype</div>
+</div>
+
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <button class="close" id="close">×</button>
+    <h2 id="modalTitle">Ask GharOS</h2>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+const modal=document.getElementById('modal'), title=document.getElementById('modalTitle'), body=document.getElementById('modalBody');
+function openModal(t,b){title.textContent=t;body.innerHTML=b;modal.classList.add('show')}
+document.getElementById('close').onclick=()=>modal.classList.remove('show');
+modal.onclick=e=>{if(e.target===modal)modal.classList.remove('show')};
+document.getElementById('seeToday').onclick=()=>document.getElementById('today').scrollIntoView({behavior:'smooth'});
+document.getElementById('whyBtn').onclick=()=>openModal('Why is the bill higher?',`<div class="explain"><b>GharOS found three signals:</b><br><br>• AC usage is estimated 21% higher than your recent pattern.<br>• Your household crossed into a higher tariff slab this cycle.<br>• Heavy appliance usage has shifted toward peak hours.<br><br><b>Suggested action:</b> check the AC filter and shift heavy appliance use after 10 PM where practical.</div><p class="small">The point isn't to show a bill. It's to explain the bill in the context of your household.</p>`);
+document.getElementById('serviceBtn').onclick=()=>openModal('RO service',`<div class="explain"><b>Due:</b> Friday<br><b>Warranty:</b> 42 days remaining<br><b>Typical cost:</b> ₹450<br><b>Last service:</b> 5 months ago<br><br>GharOS can remind you, keep the warranty information with the appliance, and surface the task before it becomes urgent.</div>`);
+document.getElementById('apptBtn').onclick=()=>openModal('Added to family plan',`<div class="explain">Mum's appointment is now on the household plan for <b>Thursday, 5:30 PM</b>.<br><br>GharOS would also surface travel time and remind the relevant family member instead of making someone coordinate it manually.</div>`);
+document.getElementById('groceryBtn').onclick=()=>openModal('Sunday grocery list',`<div class="explain"><b>Based on your household pattern:</b><br><br>Atta · Rice · Dal · Milk · Vegetables · Dishwash liquid<br><br>GharOS prepares the list from recurring behavior; you stay in control of what actually gets ordered.</div>`);
+document.getElementById('spendBtn').onclick=()=>openModal('This month's spending',`<div class="explain"><b>₹18,460 total</b><br><br>Groceries · ₹7,120<br>Utilities · ₹5,840<br>Household services · ₹2,100<br>Other · ₹3,400<br><br>Utilities are the biggest reason you're above your recent average.</div>`);
+document.getElementById('saveBtn').onclick=()=>openModal('Savings estimate saved',`<div class="explain">GharOS will keep the <b>₹1,200 potential savings</b> estimate in your household insights. This is an estimate, not a promise — the product should earn trust by showing its reasoning.</div>`);
+document.getElementById('remindBtn').onclick=()=>openModal('Reminder set',`<div class="explain">I'll remind you Friday to check the electricity bill and AC filter.</div>`);
+function ask(q){openModal('Ask GharOS',`<div class="chat"><div class="msg me">${q}</div><div class="msg ai">${answer(q)}</div></div><div class="chatbar"><input id="chatInput" placeholder="Ask another household question…"><button id="send">Ask</button></div>`);document.getElementById('send').onclick=()=>{const x=document.getElementById('chatInput').value.trim();if(x){document.querySelector('.chat').innerHTML+=`<div class="msg me">${x.replace(/</g,'&lt;')}</div><div class="msg ai">${answer(x)}</div>`;document.getElementById('chatInput').value=''}}}
+function answer(q){q=q.toLowerCase();if(q.includes('bill')||q.includes('electric'))return`Your electricity bill is about 18% above your recent range. The strongest signals are higher AC usage and a tariff-slab change. I'd check those before assuming the whole household is consuming more.`;if(q.includes('due')||q.includes('week'))return`This week: RO service Friday, Mum's appointment Thursday at 5:30 PM, and your electricity bill is due in 3 days. I can group these into a simple household plan.`;return`Based on this month's pattern, utilities are the easiest place to look first. Your household is also spending more on groceries than its recent average. I'd start with those two rather than trying to cut everything.`}
+document.querySelectorAll('.ask').forEach(b=>b.onclick=()=>ask(b.dataset.q));
+document.getElementById('askNav').onclick=()=>ask('What should I know about my household today?');
+</script>
+</body>
+</html>
